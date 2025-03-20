@@ -1,11 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
-
 const CallToAction = () => {
-  return (
-    <section className="py-20 bg-white">
+  return <section className="py-20 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="relative bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl overflow-hidden">
           {/* Background pattern */}
@@ -31,27 +28,18 @@ const CallToAction = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                className="bg-white text-primary-700 hover:bg-primary-50 text-lg px-6 h-12 font-medium btn-hover-effect"
-                asChild
-              >
+              <Button className="bg-white text-primary-700 hover:bg-primary-50 text-lg px-6 h-12 font-medium btn-hover-effect" asChild>
                 <Link to="/contact">
                   Schedule a Consultation <ChevronRight className="h-5 w-5 ml-1" />
                 </Link>
               </Button>
-              <Button 
-                variant="outline" 
-                className="border-white text-white hover:bg-white/10 hover:border-white text-lg px-6 h-12 font-medium"
-                asChild
-              >
-                <Link to="/about">Learn About Our Approach</Link>
+              <Button variant="outline" className="border-white text-white hover:bg-white/10 hover:border-white text-lg px-6 h-12 font-medium" asChild>
+                <Link to="/about" className="change the text colour to black\n">Learn About Our Approach</Link>
               </Button>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CallToAction;
