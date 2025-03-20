@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from "react";
-import { Heart } from "lucide-react";
+import { Heart, HandHelping } from "lucide-react";
 
 const Philosophy = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -61,6 +61,32 @@ const Philosophy = () => {
     // Animation loop
     let animationFrameId: number;
     
+    // Hand-connecting animation variables
+    const handLeftImg = new Image();
+    const handRightImg = new Image();
+    handLeftImg.src = "data:image/svg+xml;utf8," + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#7cc8fb" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-helping">
+        <path d="M11 12h2a4 4 0 0 1 4 4v4H9v-7a3 3 0 0 1 3-3v0"></path>
+        <path d="M14 6.5L12 5l-2 1.5 2 1.5 2-1.5z"></path>
+        <path d="M11 8.5V12"></path>
+        <path d="M6 10h3a1 1 0 0 1 1 1v0a1 1 0 0 1-1 1H6"></path>
+        <path d="M5 10v4a1 1 0 0 0 1 1h2"></path>
+      </svg>
+    `);
+    handRightImg.src = "data:image/svg+xml;utf8," + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#7cc8fb" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-helping" style="transform: scaleX(-1)">
+        <path d="M11 12h2a4 4 0 0 1 4 4v4H9v-7a3 3 0 0 1 3-3v0"></path>
+        <path d="M14 6.5L12 5l-2 1.5 2 1.5 2-1.5z"></path>
+        <path d="M11 8.5V12"></path>
+        <path d="M6 10h3a1 1 0 0 1 1 1v0a1 1 0 0 1-1 1H6"></path>
+        <path d="M5 10v4a1 1 0 0 0 1 1h2"></path>
+      </svg>
+    `);
+    
+    let handDistance = 200; // Initial distance between hands
+    let handDirection = -1; // Direction of movement (-1: coming together, 1: moving apart)
+    let handCycleProgress = 0; // 0 to 1 for a complete cycle
+    
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
@@ -97,6 +123,53 @@ const Philosophy = () => {
           }
         }
       }
+      
+      // Draw hands connecting animation
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      
+      // Update hand cycle
+      handCycleProgress += 0.005;
+      if (handCycleProgress >= 1) {
+        handCycleProgress = 0;
+      }
+      
+      // Calculate hand positions with pulsing effect
+      const pulseEffect = Math.sin(handCycleProgress * Math.PI * 2) * 20;
+      const baseDistance = 150 + pulseEffect;
+      
+      // Draw left hand
+      const leftHandX = centerX - baseDistance;
+      const leftHandY = centerY - 60;
+      ctx.globalAlpha = 0.3;
+      ctx.drawImage(handLeftImg, leftHandX - 36, leftHandY - 36, 72, 72);
+      
+      // Draw right hand
+      const rightHandX = centerX + baseDistance;
+      const rightHandY = centerY - 60;
+      ctx.drawImage(handRightImg, rightHandX - 36, rightHandY - 36, 72, 72);
+      
+      // Draw connecting light between hands
+      const gradient = ctx.createLinearGradient(leftHandX, leftHandY, rightHandX, rightHandY);
+      gradient.addColorStop(0, "rgba(124, 200, 251, 0.05)");
+      gradient.addColorStop(0.5, "rgba(124, 200, 251, 0.2)");
+      gradient.addColorStop(1, "rgba(124, 200, 251, 0.05)");
+      
+      ctx.beginPath();
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 2;
+      ctx.moveTo(leftHandX, leftHandY);
+      ctx.lineTo(rightHandX, rightHandY);
+      ctx.stroke();
+      
+      // Draw pulsating circles where the hands would connect
+      const pulseSize = Math.sin(handCycleProgress * Math.PI * 4) * 10 + 15;
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(124, 200, 251, 0.2)";
+      ctx.arc(centerX, centerY - 60, pulseSize, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.globalAlpha = 1.0;
       
       animationFrameId = requestAnimationFrame(animate);
     };
