@@ -3,7 +3,7 @@ import {
   BarChart3, 
   Brain, 
   FileText, 
-  Flask, 
+  Beaker, 
   Microscope, 
   Users 
 } from "lucide-react";
@@ -35,7 +35,7 @@ const features = [
     description: "Expert analysis of clinical trial data to assess treatment effectiveness and support regulatory submissions."
   },
   {
-    icon: <Flask className="h-6 w-6 text-primary-600" />,
+    icon: <Beaker className="h-6 w-6 text-primary-600" />,
     title: "Market Access Strategy",
     description: "Strategic guidance to optimize value demonstration and market access for healthcare innovations."
   }
