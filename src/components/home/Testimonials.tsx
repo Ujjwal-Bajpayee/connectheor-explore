@@ -59,10 +59,10 @@ const Testimonials = () => {
                   </div>
                   
                   <div className="flex space-x-3 mt-6 md:mt-0">
-                    <Button variant="outline" size="icon" onClick={prevTestimonial} className="border-white/20 text-white hover:text-white bg-zinc-950 hover:bg-zinc-800">
+                    <Button variant="outline" size="icon" onClick={prevTestimonial} className="border-white/20 text-white hover:text-white bg-slate-800 hover:bg-slate-700">
                       <ArrowLeft className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon" onClick={nextTestimonial} className="border-white/20 text-white hover:text-white bg-gray-950 hover:bg-gray-800">
+                    <Button variant="outline" size="icon" onClick={nextTestimonial} className="border-white/20 text-white hover:text-white bg-slate-800 hover:bg-slate-700">
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </div>
