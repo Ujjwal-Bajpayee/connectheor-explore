@@ -1,42 +1,31 @@
-
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const testimonials = [
-  {
-    quote: "ConnectHEOR's approach to health economic modeling transformed our understanding of our new therapy's value proposition. Their insights were instrumental in our successful market access strategy.",
-    author: "Dr. Sarah Johnson",
-    title: "Chief Medical Officer",
-    company: "BioInnovate Therapeutics"
-  },
-  {
-    quote: "The team's expertise in real-world evidence analysis provided us with compelling data that supported our regulatory submissions and strengthened our value story to payers.",
-    author: "Michael Chen",
-    title: "VP of Market Access",
-    company: "PharmaTech Solutions"
-  },
-  {
-    quote: "Working with ConnectHEOR elevated our outcomes research capabilities. Their AI-driven approach identified patterns in our data that we had overlooked, leading to significant improvements in our clinical protocols.",
-    author: "Dr. Amelia Rodriguez",
-    title: "Director of Clinical Research",
-    company: "Global Health Institute"
-  }
-];
-
+const testimonials = [{
+  quote: "ConnectHEOR's approach to health economic modeling transformed our understanding of our new therapy's value proposition. Their insights were instrumental in our successful market access strategy.",
+  author: "Dr. Sarah Johnson",
+  title: "Chief Medical Officer",
+  company: "BioInnovate Therapeutics"
+}, {
+  quote: "The team's expertise in real-world evidence analysis provided us with compelling data that supported our regulatory submissions and strengthened our value story to payers.",
+  author: "Michael Chen",
+  title: "VP of Market Access",
+  company: "PharmaTech Solutions"
+}, {
+  quote: "Working with ConnectHEOR elevated our outcomes research capabilities. Their AI-driven approach identified patterns in our data that we had overlooked, leading to significant improvements in our clinical protocols.",
+  author: "Dr. Amelia Rodriguez",
+  title: "Director of Clinical Research",
+  company: "Global Health Institute"
+}];
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-
   const nextTestimonial = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    setActiveIndex(prev => (prev + 1) % testimonials.length);
   };
-
   const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setActiveIndex(prev => (prev - 1 + testimonials.length) % testimonials.length);
   };
-
-  return (
-    <section className="py-20 bg-primary-700 text-white relative overflow-hidden">
+  return <section className="py-20 bg-primary-700 text-white relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
         <div className="absolute top-10 left-10 w-40 h-40 bg-primary-600 rounded-full opacity-30 blur-3xl"></div>
@@ -70,20 +59,10 @@ const Testimonials = () => {
                   </div>
                   
                   <div className="flex space-x-3 mt-6 md:mt-0">
-                    <Button 
-                      variant="outline" 
-                      size="icon" 
-                      onClick={prevTestimonial} 
-                      className="border-white/20 text-white hover:bg-white/10 hover:text-white"
-                    >
+                    <Button variant="outline" size="icon" onClick={prevTestimonial} className="border-white/20 text-white hover:text-white bg-zinc-950 hover:bg-zinc-800">
                       <ArrowLeft className="h-4 w-4" />
                     </Button>
-                    <Button 
-                      variant="outline" 
-                      size="icon" 
-                      onClick={nextTestimonial}
-                      className="border-white/20 text-white hover:bg-white/10 hover:text-white"
-                    >
+                    <Button variant="outline" size="icon" onClick={nextTestimonial} className="border-white/20 text-white hover:text-white bg-gray-950 hover:bg-gray-800">
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </div>
@@ -93,21 +72,10 @@ const Testimonials = () => {
           </div>
           
           <div className="flex justify-center mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                className={`w-2.5 h-2.5 rounded-full mx-1 transition-all duration-300 ${
-                  index === activeIndex ? "bg-white" : "bg-white/30"
-                }`}
-                onClick={() => setActiveIndex(index)}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
+            {testimonials.map((_, index) => <button key={index} className={`w-2.5 h-2.5 rounded-full mx-1 transition-all duration-300 ${index === activeIndex ? "bg-white" : "bg-white/30"}`} onClick={() => setActiveIndex(index)} aria-label={`Go to testimonial ${index + 1}`} />)}
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Testimonials;
